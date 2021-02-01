@@ -22,7 +22,7 @@ public class DigitToLetterServiceTest {
 
     @Test
     public void getLetters() {
-        System.out.println("inupt:"+inputDigits);
-        System.out.println("output:"+digitToLetterService.getLetters(inputDigits));
+        System.out.println("inupt: "+inputDigits);
+        System.out.println("output: "+digitToLetterService.getLetters(inputDigits));
     }
 }
