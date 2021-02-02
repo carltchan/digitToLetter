@@ -17,6 +17,7 @@ public class DigitToLetterServiceTest {
     public void setup(){
         digitToLetterService = new DigitToLetterService();
         Random random = new Random();
+        //Input random number
         inputDigits = random.nextInt(9)+","+random.nextInt(9);
     }
 
