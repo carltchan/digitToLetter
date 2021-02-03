@@ -29,7 +29,7 @@ public class DigitToLetterService implements IDigitToLetterService {
      */
     public DigitToLetterService() {
         // initialize the mapping of digit and letter mapping
-        this.digitLetterMapper.put("1", "1");
+        this.digitLetterMapper.put("1", "");
         this.digitLetterMapper.put("2", "A_B_C");
         this.digitLetterMapper.put("3", "D_E_F");
         this.digitLetterMapper.put("4", "G_H_I");
@@ -38,10 +38,37 @@ public class DigitToLetterService implements IDigitToLetterService {
         this.digitLetterMapper.put("7", "P_Q_R_S");
         this.digitLetterMapper.put("8", "T_U_V");
         this.digitLetterMapper.put("9", "W_X_Y_Z");
-        this.digitLetterMapper.put("0", "0");
-        this.digitLetterMapper.put("*", "*");
-        this.digitLetterMapper.put("#", "#");
+        this.digitLetterMapper.put("0", "");
+        this.digitLetterMapper.put("*", "");
+        this.digitLetterMapper.put("#", "");
     }
+
+    /**
+     * Gets the letter contained in the input numeric map
+     * @param digits
+     */
+    public void getInputLetters(String digits){
+        String[] digits_in = digits.split(",");
+        //Extract the array corresponding to the number
+        if (digits_in.length > 0) {
+            for (int i = 0; i < digits_in.length; i++) {
+                String tmpDigits;
+                //If it is larger than one digit, it will be broken down to one digit
+                if (digits_in[i].length() > 1) {
+                    tmpDigits = digits_in[i].substring(0, 1);
+                    String lastStr = digits_in[i].substring(1);
+                    getInputLetters(lastStr);
+                } else {
+                    tmpDigits = digits_in[i];
+                }
+                String letters = this.digitLetterMapper.get(tmpDigits);
+                if (null != letters && letters.length() > 0) {
+                    inArr.add(letters);
+                }
+            }
+        }
+    }
+
 
     /**
      *Method for converting digits to letters
@@ -50,18 +77,8 @@ public class DigitToLetterService implements IDigitToLetterService {
      */
     @Override
     public List<String> getLetters(String digits){
-
-        String[] digits_in = digits.split(",");
-        //Extract the array corresponding to the number
-        if (digits_in.length > 0) {
-            for (int i = 0; i < digits_in.length; i++) {
-                String letters = this.digitLetterMapper.get(digits_in[i]);
-                if (null != letters && letters.length() > 0) {
-                    inArr.add(letters);
-                }
-            }
-        }
-
+        //Gets the letter contained in the input numeric map
+        getInputLetters(digits);
         List<String> arr = new ArrayList<String>();
         if (inArr.size() > 0) {
             //Dealing with letter combinations

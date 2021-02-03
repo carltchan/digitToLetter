@@ -18,7 +18,7 @@ public class DigitToLetterServiceTest {
         digitToLetterService = new DigitToLetterService();
         Random random = new Random();
         //Input random number
-        inputDigits = random.nextInt(9)+","+random.nextInt(9);
+        inputDigits = random.nextInt(99)+","+random.nextInt(99);
     }
 
     @Test
